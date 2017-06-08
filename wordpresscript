@@ -1,0 +1,39 @@
+#!/bin/sh
+#Christian G Ulloa and Darwin Ds by codigocero.club
+#script for change the content in the db tables
+#june 7 , 2017
+
+
+#for var pass input de real password
+pass=xxxxxxxxxx
+
+id=876
+j=0
+
+#titulosvar.txt is the file list in the directory
+#pdflist.txt is too the file list in the directory
+#
+
+readarray titulosvar < titulos.txt
+
+readarray pdflistvar < pdflist.txt
+
+var1="mysql ccdpdb -uccdpuser -p$pass insert into _posts (post_author,post_date,post_date_gmt,post_content,post_title,post_status,comment_status,ping_status,post_name,post_modified,post_modified_gmt,post_parent,guid,menu_order,post_type,comment_count) values (1,timenow(),timenow(),'[pdf-embedder url=\"../"
+varpdf2="\"]','"
+var3="','publish','closed','closed','"
+var4="',timenow(),timenow(),140,'http://gualaceo.info/ccpd/?page_id="
+var6="',0,'page',0)"
+
+for i in "${titulosvar[@]}"
+do
+
+varlstpdf="${pdflistvar[j]}"
+var2=$i
+var5=$id
+
+echo $var1$varlstpdf$varpdf2$var2$var3$var2$var4$var5$var6
+let id=id+1
+let j=j+1
+
+done
+
